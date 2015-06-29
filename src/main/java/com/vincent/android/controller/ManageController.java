@@ -15,6 +15,7 @@ import com.vincent.android.service.UserService;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Feng on 2015-06-28.
@@ -23,6 +24,7 @@ public class ManageController extends Activity {
     private ListView listView;
     private SimpleAdapter simpleAdapter;
     private UserService userService;
+    private  ArrayList<HashMap<String, Object>> items;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,9 +32,9 @@ public class ManageController extends Activity {
 
         userService = new UserService(this);
         listView = (ListView)this.findViewById(R.id.manage_listview);
-
+        items = getItems();
         //创建简单适配器
-        simpleAdapter = new SimpleAdapter(this, this.getItems(), R.layout.user_item,
+        simpleAdapter = new SimpleAdapter(this, items, R.layout.user_item,
                 new String[]{"username","mail", "avatar"},
                 new int[]{R.id.user_username,R.id.user_mail, R.id.user_avatar});
 
@@ -107,10 +109,10 @@ public class ManageController extends Activity {
                 break;
         }
         if (flag == 1){//删除成功
-            SimpleAdapter adapter = (SimpleAdapter) listView
-                    .getAdapter();
-
-                adapter.notifyDataSetChanged(); // 实现数据的实时刷新
+            items.remove(pos);
+            if (!simpleAdapter.isEmpty()) {
+                simpleAdapter.notifyDataSetChanged(); // 实现数据的实时刷新
+            }
             Toast.makeText(ManageController.this,"删除成功", Toast.LENGTH_SHORT)
                     .show();
         }
