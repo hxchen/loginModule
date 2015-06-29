@@ -23,6 +23,9 @@
         <activity android:name=".UserController"
                   android:label="User">
         </activity>
+        <activity android:name=".ManageController"
+                  android:label="Manage">
+        </activity>
     </application>
 
 </manifest>

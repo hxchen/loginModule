@@ -5,9 +5,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import com.vincent.android.controller.LoginController;
+import com.vincent.android.model.ManageViewModel;
 import com.vincent.android.model.UserModel;
 import com.vincent.android.utils.DatabaseHelper;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -95,5 +98,38 @@ public class UserService {
 
 
     //获取用户列表
-    
+    public List<ManageViewModel> getItemList(){
+        SQLiteDatabase sdb = databaseHelper.getReadableDatabase();
+        Log.w("info","123!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
+        String sql = "select * from user";
+        try{
+            Cursor cursor = sdb.rawQuery(sql, new String[]{"n"});
+            Log.w("info","1234!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
+            List<ManageViewModel> list;
+            if (cursor.moveToFirst()){ //说明有数据
+                list = new ArrayList<ManageViewModel>();
+                for(int i=0;i<cursor.getCount();i++){
+                    cursor.move(i);//移动到指定记录
+                    String username = cursor.getString(cursor.getColumnIndex("username"));
+                    String mail = cursor.getString(cursor.getColumnIndex("mail"));
+                    byte[] avatar = cursor.getBlob(cursor.getColumnIndex("avatar"));
+                    ManageViewModel viewModel = new ManageViewModel();
+                    viewModel.setUsername(username);
+                    viewModel.setMail(mail);
+                    viewModel.setAvatar(avatar);
+                    Log.d("info","!!!!!!!!!!!!!!"+list.get(i).getUsername());
+                    Log.d("info","!!!!!!!!!!!!!!!!!"+list.get(i).getAvatar().length);
+                    list.add(viewModel);
+                }
+                return  list;
+            }
+            Log.w("info","12345!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
+            //没有数据返回
+            return  null;
+        }
+        catch (Exception e){
+            Log.e("sql error", e.toString());
+            return  null;
+        }
+    }
 }
