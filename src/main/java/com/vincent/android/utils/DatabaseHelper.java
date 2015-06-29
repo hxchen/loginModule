@@ -11,7 +11,7 @@ import android.util.Log;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     static String name = "user.db";
-    static  int dbVersion = 2;
+    static  int dbVersion = 6;
 
     public DatabaseHelper(Context context){
         super(context, name, null, dbVersion);

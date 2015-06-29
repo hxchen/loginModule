@@ -54,7 +54,6 @@ public class UserService {
     public int register(UserModel userModel){
         SQLiteDatabase sdb = databaseHelper.getWritableDatabase();
         int flat = exist(userModel.getUsername());
-        Log.w("图片长度:", "" + userModel.getAvatar().length);
         if (flat == 301){ //已经存在该用户
             return 301;
         }
@@ -100,15 +99,13 @@ public class UserService {
     //获取用户列表
     public List<ManageViewModel> getItemList(){
         SQLiteDatabase sdb = databaseHelper.getReadableDatabase();
-        Log.w("info","123!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
-        String sql = "select * from user";
+        String sql = "select * from user where role = 'n';";
         try{
-            Cursor cursor = sdb.rawQuery(sql, new String[]{"n"});
-            Log.w("info","1234!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
+            Cursor cursor = sdb.rawQuery(sql, new String[]{});
             List<ManageViewModel> list;
             if (cursor.moveToFirst()){ //说明有数据
                 list = new ArrayList<ManageViewModel>();
-                for(int i=0;i<cursor.getCount();i++){
+                for(int i=0;i<cursor.getCount() - 1;i++){
                     cursor.move(i);//移动到指定记录
                     String username = cursor.getString(cursor.getColumnIndex("username"));
                     String mail = cursor.getString(cursor.getColumnIndex("mail"));
@@ -117,13 +114,10 @@ public class UserService {
                     viewModel.setUsername(username);
                     viewModel.setMail(mail);
                     viewModel.setAvatar(avatar);
-                    Log.d("info","!!!!!!!!!!!!!!"+list.get(i).getUsername());
-                    Log.d("info","!!!!!!!!!!!!!!!!!"+list.get(i).getAvatar().length);
                     list.add(viewModel);
                 }
                 return  list;
             }
-            Log.w("info","12345!!!!!!!!!!!!!!到达这里了！！！！！！！！！！！！！！！");
             //没有数据返回
             return  null;
         }

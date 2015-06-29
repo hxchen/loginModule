@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import com.vincent.android.model.ManageViewModel;
@@ -33,11 +35,22 @@ public class ManageController extends Activity {
 
         //创建简单适配器
         simpleAdapter = new SimpleAdapter(this, this.getItems(), R.layout.user_item,
-                new String[]{"username","mail","avatar"},
-                new int[]{R.id.user_username,R.id.user_mail,R.id.user_avatar});
+                new String[]{"username","mail", "avatar"},
+                new int[]{R.id.user_username,R.id.user_mail, R.id.user_avatar});
 
         //加载SimpleAdapter到ListView中
         listView.setAdapter(simpleAdapter);
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object o, String s) {
+                if (view instanceof ImageView && o instanceof Bitmap) {
+                    Bitmap bitmap = (Bitmap)o;
+                    ((ImageView)view).setImageBitmap(bitmap);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public ArrayList<HashMap<String, Object>> getItems(){
@@ -46,13 +59,10 @@ public class ManageController extends Activity {
             return  null;
         }
         ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-        Log.d("info",list.size()+"!!!!!!!!!!!!!!!!!!!!!!!!!!");
         for(int i = 0; i < list.size();i++){
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("username", list.get(i).getUsername());
             map.put("mail", list.get(i).getMail());
-            Log.d("info",list.get(i).getUsername());
-            Log.d("info",list.get(i).getAvatar().length+"");
             //将字节数组转化为位图
             Bitmap imagebitmap= BitmapFactory.decodeByteArray( list.get(i).getAvatar(), 0,  list.get(i).getAvatar().length);
             map.put("avatar",imagebitmap );

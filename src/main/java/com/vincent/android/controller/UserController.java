@@ -24,7 +24,6 @@ public class UserController extends Activity {
 
         ((TextView)findViewById(R.id.user_name)).setText(username);
         Bitmap bitmap = BitmapFactory.decodeByteArray(avatar, 0, avatar.length);
-        Log.w("图片长度:", "" + bitmap.getByteCount());
         ((ImageView)findViewById(R.id.show_image)).setImageBitmap(bitmap);
     }
 }
