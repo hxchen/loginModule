@@ -1,3 +1,7 @@
-#loginModule
+# cocos2dx-loginModule
+> cocos2dx登陆模块sdk
 
-详情见wiki [http://git.oschina.net/zhs/loginModule/wikis/home](http://git.oschina.net/zhs/loginModule/wikis/home)
+## 文档
+点击[这里](https://github.com/vincent-zheng/cocos2dx-loginModule/wiki)可以获取
+
+
