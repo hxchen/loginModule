@@ -18,6 +18,7 @@ public class LoginController extends Activity {
 
     public static int flag = 0;
 
+    //@TODO: 改造登陆控制，将页面的生成方式改成用java代码生成
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,7 @@ public class LoginController extends Activity {
         }
     }
 
+    //@TODO: 完成用户类型划分
     public void login(View view) {
         UserService userService = new UserService(this);
         String login_name = ((EditText)findViewById(R.id.login_name)).getText().toString();

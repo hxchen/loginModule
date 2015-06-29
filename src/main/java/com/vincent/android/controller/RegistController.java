@@ -30,6 +30,7 @@ public class RegistController extends Activity {
 
     private int RESULT_LOAD_IMAGE;
 
+    //TODO:改造注册模块，将页面生成方式改成用java代码实现
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

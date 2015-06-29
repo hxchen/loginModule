@@ -77,9 +77,4 @@ public class UserModel {
     private UserModel() {
 
     }
-
-    public UserModel login() {
-        Log.i("UserModel", "test login function");
-        return  this;
-    }
 }
