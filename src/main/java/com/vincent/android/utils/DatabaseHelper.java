@@ -11,7 +11,7 @@ import android.util.Log;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
     static String name = "user.db";
-    static  int dbVersion = 6;
+    static  int dbVersion = 7;
 
     public DatabaseHelper(Context context){
         super(context, name, null, dbVersion);
@@ -24,11 +24,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "id integer primary key autoincrement," +
                 "username varchar(20) not null," +
                 "password varchar(20) not null," +
-                "mail varchar(20) not null," +
-                "avatar blob not null," +
+                "mail varchar(20)," +
+                "avatar blob," +
                 "role char(1) )";
-        Log.i("hehe", "hehe");
         sqLiteDatabase.execSQL(sql);
+        String createAdminAccountSql = "INSERT INTO user (username, password, role) VALUES ('admin', '123456', 'y');";
+        sqLiteDatabase.execSQL(createAdminAccountSql);
     }
 
     @Override

@@ -50,7 +50,17 @@ public class LoginController extends Activity {
         switch (flat) {
             case 1: {
                 Intent intent = new Intent();
-                intent.setClass(LoginController.this, ManageController.class);
+                switch (UserModel.getInstance().getRole()) {
+                    case 'n': {
+                        intent.setClass(LoginController.this, UserController.class);
+                        break;
+                    }
+                    case 'y': {
+                        intent.setClass(LoginController.this, ManageController.class);
+                        break;
+                    }
+                }
+
                 startActivity(intent);
                 this.onDestroy();
                 break;

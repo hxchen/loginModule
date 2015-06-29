@@ -47,6 +47,8 @@ public class ManageController extends Activity {
                     Bitmap bitmap = (Bitmap)o;
                     ((ImageView)view).setImageBitmap(bitmap);
                     return true;
+                } else if(o == null) {
+                    return true;
                 }
                 return false;
             }
@@ -56,16 +58,22 @@ public class ManageController extends Activity {
     public ArrayList<HashMap<String, Object>> getItems(){
         List<ManageViewModel> list = userService.getItemList();
         if(list == null){
-            return  null;
+            ArrayList<HashMap<String, Object>> nullArr = new ArrayList<HashMap<String, Object>>();
+            return  nullArr;
         }
         ArrayList<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
         for(int i = 0; i < list.size();i++){
             HashMap<String, Object> map = new HashMap<String, Object>();
             map.put("username", list.get(i).getUsername());
             map.put("mail", list.get(i).getMail());
-            //将字节数组转化为位图
-            Bitmap imagebitmap= BitmapFactory.decodeByteArray( list.get(i).getAvatar(), 0,  list.get(i).getAvatar().length);
-            map.put("avatar",imagebitmap );
+            if (list.get(i).getAvatar() == null) {
+                map.put("avatar", null);
+            } else {
+                //将字节数组转化为位图
+                Bitmap imagebitmap= BitmapFactory.decodeByteArray( list.get(i).getAvatar(), 0,  list.get(i).getAvatar().length);
+                map.put("avatar",imagebitmap );
+            }
+
             items.add(map);
         }
         return  items;

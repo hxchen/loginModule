@@ -31,18 +31,19 @@ public class UserService {
         Cursor cursor = sdb.rawQuery(sql, new String[]{username, password});
         if(cursor.moveToFirst() == true){
             String role = cursor.getString(cursor.getColumnIndex("role"));
-            if(role.equals("y")){ //属于管理员
-
-            }
-            else if(role.equals("n")){ //属于普通用户
-
-            }
             UserModel.getInstance()
                     .setId(cursor.getInt(cursor.getColumnIndex("id")))
                     .setMail(cursor.getString(cursor.getColumnIndex("mail")))
-                    .setAvatar(cursor.getBlob(cursor.getColumnIndex("avatar")))
                     .setUsername(cursor.getString(cursor.getColumnIndex("username")))
                     .setRole(role.toCharArray()[0]);
+            if(role.equals("y")){ //属于管理员
+                byte nullArr[] = {};
+                UserModel.getInstance().setAvatar(nullArr);
+            }
+            else if(role.equals("n")){ //属于普通用户
+                UserModel.getInstance().setAvatar(cursor.getBlob(cursor.getColumnIndex("avatar")));
+            }
+
             cursor.close();
             return  1;
         }
@@ -102,11 +103,11 @@ public class UserService {
         String sql = "select * from user;";
         try{
             Cursor cursor = sdb.rawQuery(sql, new String[]{});
-            List<ManageViewModel> list;
+            List<ManageViewModel> list = new ArrayList<ManageViewModel>();
             if (cursor.moveToFirst()){ //说明有数据
-                list = new ArrayList<ManageViewModel>();
-                for(int i=0;i<cursor.getCount();i++){
-                    cursor.move(i);//移动到指定记录
+
+                for(int i=0;i< cursor.getCount();i++){
+                    cursor.moveToPosition(i);//移动到指定记录
                     String username = cursor.getString(cursor.getColumnIndex("username"));
                     String mail = cursor.getString(cursor.getColumnIndex("mail"));
                     byte[] avatar = cursor.getBlob(cursor.getColumnIndex("avatar"));
@@ -116,14 +117,15 @@ public class UserService {
                     viewModel.setAvatar(avatar);
                     list.add(viewModel);
                 }
+                cursor.close();
                 return  list;
             }
             //没有数据返回
-            return  null;
+            return  list;
         }
         catch (Exception e){
-            Log.e("sql error getlist", e.toString());
-            return  null;
+            List<ManageViewModel> nullList = new ArrayList<ManageViewModel>();
+            return  nullList;
         }
     }
 }
