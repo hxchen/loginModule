@@ -99,13 +99,13 @@ public class UserService {
     //获取用户列表
     public List<ManageViewModel> getItemList(){
         SQLiteDatabase sdb = databaseHelper.getReadableDatabase();
-        String sql = "select * from user where role = 'n';";
+        String sql = "select * from user;";
         try{
             Cursor cursor = sdb.rawQuery(sql, new String[]{});
             List<ManageViewModel> list;
             if (cursor.moveToFirst()){ //说明有数据
                 list = new ArrayList<ManageViewModel>();
-                for(int i=0;i<cursor.getCount() - 1;i++){
+                for(int i=0;i<cursor.getCount();i++){
                     cursor.move(i);//移动到指定记录
                     String username = cursor.getString(cursor.getColumnIndex("username"));
                     String mail = cursor.getString(cursor.getColumnIndex("mail"));
@@ -122,7 +122,7 @@ public class UserService {
             return  null;
         }
         catch (Exception e){
-            Log.e("sql error", e.toString());
+            Log.e("sql error getlist", e.toString());
             return  null;
         }
     }
