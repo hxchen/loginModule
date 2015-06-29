@@ -100,14 +100,15 @@ public class UserService {
     //获取用户列表
     public List<ManageViewModel> getItemList(){
         SQLiteDatabase sdb = databaseHelper.getReadableDatabase();
-        String sql = "select * from user;";
+        String sql = "select * from user where role=?";
         try{
-            Cursor cursor = sdb.rawQuery(sql, new String[]{});
+            Cursor cursor = sdb.rawQuery(sql, new String[]{"n"});
             List<ManageViewModel> list = new ArrayList<ManageViewModel>();
             if (cursor.moveToFirst()){ //说明有数据
 
                 for(int i=0;i< cursor.getCount();i++){
                     cursor.moveToPosition(i);//移动到指定记录
+                    int id = cursor.getInt(cursor.getColumnIndex("id"));
                     String username = cursor.getString(cursor.getColumnIndex("username"));
                     String mail = cursor.getString(cursor.getColumnIndex("mail"));
                     byte[] avatar = cursor.getBlob(cursor.getColumnIndex("avatar"));
@@ -126,6 +127,20 @@ public class UserService {
         catch (Exception e){
             List<ManageViewModel> nullList = new ArrayList<ManageViewModel>();
             return  nullList;
+        }
+    }
+
+    //删除用户
+    public int delete(String username){
+        SQLiteDatabase sdb = databaseHelper.getReadableDatabase();
+        String sql = "delete from user where username=?";
+        Object[] obj = {username};
+        try {
+            sdb.execSQL(sql, obj);
+            return  1;
+        }
+        catch (Exception e){
+            return  313;
         }
     }
 }
