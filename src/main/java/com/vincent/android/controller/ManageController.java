@@ -2,6 +2,7 @@ package com.vincent.android.controller;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -99,7 +100,9 @@ public class ManageController extends ActionBarActivity {
 
     // 增加用户
     public void addUser(MenuItem item) {
-        Log.i("test", "add User");
+        Intent intent = new Intent();
+        intent.setClass(ManageController.this, AddController.class);
+        startActivity(intent);
     }
 
     // 长按菜单响应函数
@@ -131,7 +134,7 @@ public class ManageController extends ActionBarActivity {
             Toast.makeText(ManageController.this,"删除成功", Toast.LENGTH_SHORT)
                     .show();
         }
-        else if(flag == 313){
+        else if(flag == 411){
             Toast.makeText(ManageController.this, "系统删除失败", Toast.LENGTH_SHORT)
                     .show();
         }

@@ -27,6 +27,9 @@
                   android:theme="@style/AppThemeWithActionBar"
                   android:label="Manage">
         </activity>
+        <activity android:name=".AddController"
+                  android:label="Manage">
+        </activity>
     </application>
 
 </manifest>
