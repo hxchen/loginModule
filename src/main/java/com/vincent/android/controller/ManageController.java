@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import com.vincent.android.model.ManageViewModel;
+import com.vincent.android.model.UserModel;
 import com.vincent.android.service.UserService;
+import com.vincent.android.LoginModuleApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -102,6 +104,14 @@ public class ManageController extends ActionBarActivity {
     public void addUser(MenuItem item) {
         Intent intent = new Intent();
         intent.setClass(ManageController.this, AddController.class);
+        startActivity(intent);
+    }
+
+    // 退出登录
+    public void logout(MenuItem item) {
+        UserModel.getInstance().setToken(null);
+        Intent intent = new Intent();
+        intent.setClass(ManageController.this, LoginModuleApi.getInstance().getManageLogoutClass());
         startActivity(intent);
     }
 

@@ -16,6 +16,7 @@ public class UserModel {
     private String mail;
     private byte[] avatar;
     private char role;
+    private String token;
 
     public int getId() {
         return id;
@@ -70,11 +71,19 @@ public class UserModel {
         this.role = role;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public UserModel setToken(String _token) {
+        this.token = _token;
+        return this;
+    }
+
     public static UserModel getInstance() {
         return instance;
     }
 
     private UserModel() {
-
     }
 }
