@@ -6,7 +6,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:1.1.1'
     }
 }
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 repositories {
     jcenter()
@@ -17,7 +17,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "com.vincent.android.loginmodule"
+//        applicationId "com.vincent.android.loginmodule"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
