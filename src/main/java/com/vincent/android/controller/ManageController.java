@@ -1,11 +1,14 @@
 package com.vincent.android.controller;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
@@ -20,7 +23,7 @@ import java.util.Map;
 /**
  * Created by Feng on 2015-06-28.
  */
-public class ManageController extends Activity {
+public class ManageController extends ActionBarActivity {
     private ListView listView;
     private SimpleAdapter simpleAdapter;
     private UserService userService;
@@ -85,6 +88,18 @@ public class ManageController extends Activity {
             items.add(map);
         }
         return  items;
+    }
+
+    // Actionbar 菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    // 增加用户
+    public void addUser(MenuItem item) {
+        Log.i("test", "add User");
     }
 
     // 长按菜单响应函数

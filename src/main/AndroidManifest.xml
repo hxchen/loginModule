@@ -24,6 +24,7 @@
                   android:label="User">
         </activity>
         <activity android:name=".ManageController"
+                  android:theme="@style/AppThemeWithActionBar"
                   android:label="Manage">
         </activity>
     </application>
