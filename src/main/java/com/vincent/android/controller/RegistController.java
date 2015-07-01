@@ -103,7 +103,7 @@ public class RegistController extends Activity {
             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
             startActivity(intent);
             // 销毁当前activity
-            RegistController.this.onDestroy();
+            RegistController.this.finish();
         }
         else{
             switch(flag) {

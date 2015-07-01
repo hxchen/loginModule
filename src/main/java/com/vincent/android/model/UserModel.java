@@ -86,4 +86,10 @@ public class UserModel {
 
     private UserModel() {
     }
+
+    public boolean destory() {
+        instance = null;
+        instance = new UserModel();
+        return true;
+    }
 }

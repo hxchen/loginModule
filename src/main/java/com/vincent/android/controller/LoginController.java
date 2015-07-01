@@ -54,16 +54,19 @@ public class LoginController extends Activity {
                 switch (UserModel.getInstance().getRole()) {
                     case 'n': {
                         intent.setClass(LoginController.this, LoginModuleApi.getInstance().getLoginClass());
+                        intent.putExtra("flag", LoginModuleApi.FLAG_OK);
+                        intent.putExtra("token", LoginModuleApi.getInstance().getToken());
+                        this.setResult(RESULT_OK, intent);
                         break;
                     }
                     case 'y': {
                         intent.setClass(LoginController.this, ManageController.class);
+                        LoginController.this.finish();
+                        startActivity(intent);
                         break;
                     }
                 }
-
-                startActivity(intent);
-                this.onDestroy();
+                this.finish();
                 break;
             }
             case 201: {
