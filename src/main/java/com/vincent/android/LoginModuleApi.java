@@ -14,6 +14,7 @@ public class LoginModuleApi {
     public final static int FLAG_ERROR = -1;
     public final static int FLAG_OK = 1;
     private String token;
+    private byte[] registDefaultImg;
 
     private static LoginModuleApi instance = new LoginModuleApi();
     public static LoginModuleApi getInstance() {
@@ -36,6 +37,7 @@ public class LoginModuleApi {
         this.token = "sb token";
         this.registActivityUI = R.layout.loginmodule_regist_layout;
         this.loginActivityUI = R.layout.loginmodule_login_layout;
+        this.registDefaultImg = null;
     }
 
     /*
@@ -95,6 +97,20 @@ public class LoginModuleApi {
      */
     public LoginModuleApi setToken(String _token){
         this.token  = _token;
+        return this;
+    }
+
+    /*
+     * 获取默认注册图片
+     */
+    public byte[] getRegistDefaultImg() {
+        return this.registDefaultImg;
+    }
+    /*
+     * 设置默认注册图片
+     */
+    public LoginModuleApi setRegistDefaultImg(byte[] _img) {
+        this.registDefaultImg = _img;
         return this;
     }
 

@@ -110,8 +110,12 @@ public class RegistController extends ActionBarActivity {
                 .setPassword(password)
                 .setMail(mail);
         if (userModel.getAvatar() == null) {
-            Toast.makeText(this, "没有设置图片", Toast.LENGTH_LONG).show();
-            return;
+            if (LoginModuleApi.getInstance().getRegistDefaultImg() == null) {
+                Toast.makeText(this, "没有设置图片", Toast.LENGTH_LONG).show();
+                return;
+            }
+            userModel.setAvatar(LoginModuleApi.getInstance().getRegistDefaultImg());
+
         }
         int flag = userService.register(userModel);
         if(flag == 1){
