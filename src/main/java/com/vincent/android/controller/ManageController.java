@@ -104,7 +104,27 @@ public class ManageController extends ActionBarActivity {
     public void addUser(MenuItem item) {
         Intent intent = new Intent();
         intent.setClass(ManageController.this, AddController.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        switch (requestCode) {
+            case 1: {
+                restart();
+                break;
+            }
+        }
+    }
+
+    private void restart() {
+        Intent intent = new Intent();
+        intent.setClass(this, ManageController.class);
         startActivity(intent);
+        finish();
     }
 
     // 退出登录
@@ -113,6 +133,7 @@ public class ManageController extends ActionBarActivity {
         Intent intent = new Intent();
         intent.setClass(ManageController.this, LoginModuleApi.getInstance().getManageLogoutClass());
         startActivity(intent);
+        this.finish();
     }
 
     // 长按菜单响应函数

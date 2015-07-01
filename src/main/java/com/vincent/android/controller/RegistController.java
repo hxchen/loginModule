@@ -1,5 +1,6 @@
 package com.vincent.android.controller;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -7,8 +8,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,19 +27,40 @@ import java.io.OutputStream;
 /**
  * Created by HS on 2015/6/23.
  */
-public class RegistController extends Activity {
+public class RegistController extends ActionBarActivity {
     private EditText etUsername,etPassword,etMail;
 
     private UserService userService;
 
     private int RESULT_LOAD_IMAGE;
 
-    //TODO:改造注册模块，将页面生成方式改成用java代码实现
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.regist_layout);
         init();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    // Actionbar 菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.regist_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.setClass(this, LoginController.class);
+            startActivity(intent);
+            this.finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private void init(){
@@ -93,17 +118,13 @@ public class RegistController extends Activity {
             return;
         }
         int flag = userService.register(userModel);
-        if(flag == 1){//注册成功,转到登录页面
-            LoginController.flag = flag;
+        if(flag == 1){
             Intent intent = new Intent();
             intent.putExtra("username",username);
             intent.putExtra("password",password);
-            intent.setClass(RegistController.this,
-                    LoginController.class);
+            this.setResult(RESULT_OK, intent);
             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-            // 销毁当前activity
-            RegistController.this.finish();
+            this.finish();
         }
         else{
             switch(flag) {

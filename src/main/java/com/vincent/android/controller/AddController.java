@@ -6,8 +6,11 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -20,7 +23,7 @@ import java.io.ByteArrayOutputStream;
 /**
  * Created by Feng on 2015-06-30.
  */
-public class AddController extends Activity{
+public class AddController extends ActionBarActivity{
     private UserService userService;
     private EditText etUsername, etPassword, etMail;
     private int RESULT_LOAD_IMAGE;
@@ -30,8 +33,26 @@ public class AddController extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_layout);
         init();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    // Actionbar 菜单
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.regist_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void init(){
         userService = new UserService(this);
@@ -56,7 +77,6 @@ public class AddController extends Activity{
                         .setAvatar(byteArrayOutputStream.toByteArray());
                 ImageView showImage = (ImageView)findViewById(R.id.regist_image_view);
                 showImage.setImageURI(imagePath);
-                Log.i("path", imagePath.toString());
             }
             catch (Exception e){
                 Log.e("path", "exception: " + imagePath.toString());
@@ -93,17 +113,10 @@ public class AddController extends Activity{
             return;
         }
         int flag = userService.register(userModel);
-        if(flag == 1){//新增成功,返回页面
-            LoginController.flag = flag;
-            Intent intent = new Intent();
-            intent.putExtra("username",username);
-            intent.putExtra("password",password);
-            intent.setClass(AddController.this,
-                    ManageController.class);
+        if(flag == 1){
+            this.setResult(RESULT_OK);
             Toast.makeText(this, "新增成功", Toast.LENGTH_SHORT).show();
-            startActivity(intent);
-            // 销毁当前activity
-            AddController.this.onDestroy();
+            finish();
         }
         else{
             switch(flag) {

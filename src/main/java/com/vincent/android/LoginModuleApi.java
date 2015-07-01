@@ -3,6 +3,7 @@ package com.vincent.android;
 import android.app.Activity;
 import android.content.Intent;
 import com.vincent.android.controller.LoginController;
+import com.vincent.android.controller.RegistController;
 import com.vincent.android.controller.UserController;
 import com.vincent.android.model.UserModel;
 
@@ -24,50 +25,85 @@ public class LoginModuleApi {
     private int loginRequestCode;
     private Class logoutClass;
 
+    private LoginModuleApi() {
+        this.manageLogoutClass = LoginController.class;
+        this.loginClass = UserController.class;
+        this.loginRequestCode = 1;
+        this.token = "sb token";
+    }
+
+    /*
+     * 设置管理员退出时跳转页面，默认为登录页面
+     */
     public LoginModuleApi setManageLogoutClass(Class _class) {
         this.manageLogoutClass = _class;
         return this;
     }
 
+    /*
+     * 获取登录后返回的页面的类
+     */
     public Class getLoginClass() {
         return this.loginClass;
     }
 
+    /*
+     * 设置登录后跳转的页面
+     */
     public LoginModuleApi setLoginClass(Class _class) {
         this.loginClass = _class;
         return this;
     }
 
+    /*
+     * 获取管理员退出时跳转的页面，默认为登录页面
+     */
     public Class getManageLogoutClass() {
         return this.manageLogoutClass;
     }
 
+    /*
+     * 设置登录时的请求码，默认为1
+     */
     public LoginModuleApi setLoginRequestCode(int _code){
         this.loginRequestCode = _code;
         return this;
     }
 
+    /*
+     * 获取登录时的请求码
+     */
     public int getLoginRequestCode() {
         return this.loginRequestCode;
     }
 
+    /*
+     * 获取token
+     */
     public String getToken() {
         return this.token;
     }
 
-    private LoginModuleApi() {
-        this.manageLogoutClass = LoginController.class;
-        this.loginClass = UserController.class;
-        this.loginRequestCode = 0;
-        this.token = "sb token";
+    /*
+     * 设置token
+     */
+    public LoginModuleApi setToken(String _token){
+        this.token  = _token;
+        return this;
     }
 
+    /*
+     * 登录，参数为当前activity的this
+     */
     public void login(Activity _this) {
         Intent intent = new Intent();
         intent.setClass(_this, LoginController.class);
         _this.startActivityForResult(intent, this.loginRequestCode);
     }
 
+    /*
+     * 退出，参数为当前activity的this
+     */
     public boolean logout(Activity _this) {
         if (!UserModel.getInstance().destory()) {
             return false;
@@ -83,6 +119,13 @@ public class LoginModuleApi {
         _this.finish();
         return true;
     }
+
+//    public void regist (Activity _this) {
+//        Intent intent = new Intent();
+//        intent.setClass(_this, RegistController.class);
+//        _this.startActivity(intent);
+//        _this.finish();
+//    }
 
     // 页面UI部分
 
