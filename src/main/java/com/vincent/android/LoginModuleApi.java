@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import com.vincent.android.controller.LoginController;
 import com.vincent.android.controller.R;
-import com.vincent.android.controller.RegistController;
 import com.vincent.android.controller.UserController;
 import com.vincent.android.model.UserModel;
 
@@ -35,8 +34,8 @@ public class LoginModuleApi {
         this.loginClass = UserController.class;
         this.loginRequestCode = 1;
         this.token = "sb token";
-        this.registActivityUI = R.layout.regist_layout;
-        this.loginActivityUI = R.layout.login_layout;
+        this.registActivityUI = R.layout.loginmodule_regist_layout;
+        this.loginActivityUI = R.layout.loginmodule_login_layout;
     }
 
     /*

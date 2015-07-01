@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import com.vincent.android.controller.LoginController;
 import com.vincent.android.model.ManageViewModel;
 import com.vincent.android.model.UserModel;
 import com.vincent.android.utils.DatabaseHelper;

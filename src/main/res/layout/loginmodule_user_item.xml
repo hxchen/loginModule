@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <!-- 用户头像和信息 -->
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="5dp"
+            android:orientation="horizontal" >
+        <ImageView
+                android:id="@+id/loginModule_user_avatar"
+                android:src="@mipmap/ic_launcher"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"/>
+
+        <LinearLayout
+                android:layout_weight="10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/loginModule_user_username"
+                    android:text="hehe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ff0087ff"    ></TextView>/>
+            <TextView
+                    android:id="@+id/loginModule_user_mail"
+                    android:text="zhs0518@qq.com"
+                    android:layout_marginTop="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#ffa1a1a1"    ></TextView>/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

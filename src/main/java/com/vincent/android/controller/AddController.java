@@ -31,7 +31,7 @@ public class AddController extends ActionBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_layout);
+        setContentView(R.layout.loginmodule_add_layout);
         init();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -39,7 +39,7 @@ public class AddController extends ActionBarActivity{
     // Actionbar 菜单
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.regist_menu, menu);
+        getMenuInflater().inflate(R.menu.loginmodule_regist_menu, menu);
         return true;
     }
 
@@ -56,9 +56,9 @@ public class AddController extends ActionBarActivity{
 
     private void init(){
         userService = new UserService(this);
-        etUsername = (EditText)findViewById(R.id.add_name);
-        etPassword = (EditText)findViewById(R.id.add_pass);
-        etMail = (EditText)findViewById(R.id.add_mail);
+        etUsername = (EditText)findViewById(R.id.loginModule_add_name);
+        etPassword = (EditText)findViewById(R.id.loginModule_add_pass);
+        etMail = (EditText)findViewById(R.id.loginModule_add_mail);
 
 
     }
@@ -75,7 +75,7 @@ public class AddController extends ActionBarActivity{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 UserModel.getInstance()
                         .setAvatar(byteArrayOutputStream.toByteArray());
-                ImageView showImage = (ImageView)findViewById(R.id.loginModuleID_regist_image_view);
+                ImageView showImage = (ImageView)findViewById(R.id.loginModule_regist_image_view);
                 showImage.setImageURI(imagePath);
             }
             catch (Exception e){
@@ -86,13 +86,13 @@ public class AddController extends ActionBarActivity{
 
 
     // 调用系统api获取图片
-    public void getImage(View view) {
+    protected void loginModule_getImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
 
-    public void add(View view) {
+    protected void loginModule_add(View view) {
         String username = etUsername.getText().toString();
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();

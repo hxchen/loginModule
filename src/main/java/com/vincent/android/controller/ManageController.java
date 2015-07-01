@@ -1,27 +1,23 @@
 package com.vincent.android.controller;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import com.vincent.android.LoginModuleApi;
 import com.vincent.android.model.ManageViewModel;
 import com.vincent.android.model.UserModel;
 import com.vincent.android.service.UserService;
-import com.vincent.android.LoginModuleApi;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Feng on 2015-06-28.
@@ -34,15 +30,15 @@ public class ManageController extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.manage_layout);
+        setContentView(R.layout.loginmodule_manage_layout);
 
         userService = new UserService(this);
-        listView = (ListView)this.findViewById(R.id.manage_listview);
+        listView = (ListView)this.findViewById(R.id.loginModule_manage_listview);
         items = getItems();
         //创建简单适配器
-        simpleAdapter = new SimpleAdapter(this, items, R.layout.user_item,
+        simpleAdapter = new SimpleAdapter(this, items, R.layout.loginmodule_user_item,
                 new String[]{"username","mail", "avatar"},
-                new int[]{R.id.user_username,R.id.user_mail, R.id.user_avatar});
+                new int[]{R.id.loginModule_user_username,R.id.loginModule_user_mail, R.id.loginModule_user_avatar});
 
         //加载SimpleAdapter到ListView中
         listView.setAdapter(simpleAdapter);
@@ -69,7 +65,7 @@ public class ManageController extends ActionBarActivity {
         });
     }
 
-    public ArrayList<HashMap<String, Object>> getItems(){
+    protected ArrayList<HashMap<String, Object>> getItems(){
         List<ManageViewModel> list = userService.getItemList();
         if(list == null){
             ArrayList<HashMap<String, Object>> nullArr = new ArrayList<HashMap<String, Object>>();
@@ -96,7 +92,7 @@ public class ManageController extends ActionBarActivity {
     // Actionbar 菜单
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.loginmodule_menu_main, menu);
         return true;
     }
 
@@ -128,7 +124,7 @@ public class ManageController extends ActionBarActivity {
     }
 
     // 退出登录
-    public void logout(MenuItem item) {
+    protected void logout(MenuItem item) {
         UserModel.getInstance().setToken(null);
         Intent intent = new Intent();
         intent.setClass(ManageController.this, LoginModuleApi.getInstance().getManageLogoutClass());
@@ -137,6 +133,7 @@ public class ManageController extends ActionBarActivity {
     }
 
     // 长按菜单响应函数
+    @Override
     public boolean onContextItemSelected(MenuItem item) {
 
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item

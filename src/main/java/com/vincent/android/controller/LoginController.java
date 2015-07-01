@@ -1,11 +1,8 @@
 package com.vincent.android.controller;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +30,7 @@ public class LoginController extends ActionBarActivity {
     // Actionbar 菜单
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.login_menu, menu);
+        getMenuInflater().inflate(R.menu.loginmodule_login_menu, menu);
 
         return true;
     }
@@ -51,16 +48,16 @@ public class LoginController extends ActionBarActivity {
 
     private void init(){
         userService = new UserService(this);
-        etUsername = (EditText)findViewById(R.id.loginModuleID_login_name);
-        etPassword = (EditText)findViewById(R.id.loginModuleID_login_pass);
+        etUsername = (EditText)findViewById(R.id.loginModule_login_name);
+        etPassword = (EditText)findViewById(R.id.loginModule_login_pass);
 
     }
 
     //@TODO: 完成用户类型划分
-    public void loginModuleID_login(View view) {
+    public void loginModule_login(View view) {
         UserService userService = new UserService(this);
-        String login_name = ((EditText)findViewById(R.id.loginModuleID_login_name)).getText().toString();
-        String login_pass = ((EditText)findViewById(R.id.loginModuleID_login_pass)).getText().toString();
+        String login_name = ((EditText)findViewById(R.id.loginModule_login_name)).getText().toString();
+        String login_pass = ((EditText)findViewById(R.id.loginModule_login_pass)).getText().toString();
         int flat = userService.login(login_name, login_pass);
         switch (flat) {
             case 1: {
@@ -105,7 +102,7 @@ public class LoginController extends ActionBarActivity {
         }
     }
 
-    public void loginModuleID_regist(View view) {
+    public void loginModule_regist(View view) {
         Intent intent = new Intent();
         intent.setClass(LoginController.this, RegistController.class);
         startActivityForResult(intent, 1);
