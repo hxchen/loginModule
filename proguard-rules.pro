@@ -15,3 +15,9 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+-keep public class com.vincent.android.LoginModuleApi {
+public *;
+}
+
+-keep class **.R$* {*;}
