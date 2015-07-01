@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.vincent.android.LoginModuleApi;
 import com.vincent.android.model.UserModel;
 import com.vincent.android.service.UserService;
 
@@ -52,7 +53,7 @@ public class LoginController extends Activity {
                 Intent intent = new Intent();
                 switch (UserModel.getInstance().getRole()) {
                     case 'n': {
-                        intent.setClass(LoginController.this, UserController.class);
+                        intent.setClass(LoginController.this, LoginModuleApi.getInstance().getLoginClass());
                         break;
                     }
                     case 'y': {
