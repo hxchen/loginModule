@@ -75,7 +75,7 @@ public class AddController extends ActionBarActivity{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 UserModel.getInstance()
                         .setAvatar(byteArrayOutputStream.toByteArray());
-                ImageView showImage = (ImageView)findViewById(R.id.regist_image_view);
+                ImageView showImage = (ImageView)findViewById(R.id.loginModuleID_regist_image_view);
                 showImage.setImageURI(imagePath);
             }
             catch (Exception e){

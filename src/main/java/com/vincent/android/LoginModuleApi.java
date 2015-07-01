@@ -3,6 +3,7 @@ package com.vincent.android;
 import android.app.Activity;
 import android.content.Intent;
 import com.vincent.android.controller.LoginController;
+import com.vincent.android.controller.R;
 import com.vincent.android.controller.RegistController;
 import com.vincent.android.controller.UserController;
 import com.vincent.android.model.UserModel;
@@ -25,11 +26,17 @@ public class LoginModuleApi {
     private int loginRequestCode;
     private Class logoutClass;
 
+    // UI
+    private int loginActivityUI;
+    private int registActivityUI;
+
     private LoginModuleApi() {
         this.manageLogoutClass = LoginController.class;
         this.loginClass = UserController.class;
         this.loginRequestCode = 1;
         this.token = "sb token";
+        this.registActivityUI = R.layout.regist_layout;
+        this.loginActivityUI = R.layout.login_layout;
     }
 
     /*
@@ -129,4 +136,21 @@ public class LoginModuleApi {
 
     // 页面UI部分
 
+    public LoginModuleApi setLoginActivityUI(int activityID) {
+        this.loginActivityUI = activityID;
+        return this;
+    }
+
+    public int getLoginActivityUI() {
+        return this.loginActivityUI;
+    }
+
+    public LoginModuleApi setRegistActivityUI(int activityUI) {
+        this.registActivityUI = activityUI;
+        return this;
+    }
+
+    public int getRegistActivityUI() {
+        return  this.registActivityUI;
+    }
 }

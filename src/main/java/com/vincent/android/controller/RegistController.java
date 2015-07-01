@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import com.vincent.android.LoginModuleApi;
 import com.vincent.android.model.UserModel;
 import com.vincent.android.service.UserService;
 
@@ -37,7 +38,7 @@ public class RegistController extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.regist_layout);
+        setContentView(LoginModuleApi.getInstance().getRegistActivityUI());
         init();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -65,9 +66,9 @@ public class RegistController extends ActionBarActivity {
 
     private void init(){
         userService = new UserService(this);
-        etUsername = (EditText)findViewById(R.id.regist_name);
-        etPassword = (EditText)findViewById(R.id.regist_pass);
-        etMail = (EditText)findViewById(R.id.regist_mail);
+        etUsername = (EditText)findViewById(R.id.loginModuleID_regist_name);
+        etPassword = (EditText)findViewById(R.id.loginModuleID_regist_pass);
+        etMail = (EditText)findViewById(R.id.loginModuleID_regist_mail);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -81,7 +82,7 @@ public class RegistController extends ActionBarActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 UserModel.getInstance()
                         .setAvatar(byteArrayOutputStream.toByteArray());
-                ImageView showImage = (ImageView)findViewById(R.id.regist_image_view);
+                ImageView showImage = (ImageView)findViewById(R.id.loginModuleID_regist_image_view);
                 showImage.setImageURI(imagePath);
                 Log.i("path", imagePath.toString());
             }
@@ -92,12 +93,12 @@ public class RegistController extends ActionBarActivity {
     }
 
     // 调用系统api获取图片
-    public void getImage(View view) {
+    public void loginModuleID_getImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
-    public void regist(View view) {
+    public void loginModuleID_regist(View view) {
         String username = etUsername.getText().toString();
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this,"用户名不能为空",Toast.LENGTH_SHORT).show();
@@ -120,8 +121,8 @@ public class RegistController extends ActionBarActivity {
         int flag = userService.register(userModel);
         if(flag == 1){
             Intent intent = new Intent();
-            intent.putExtra("username",username);
-            intent.putExtra("password",password);
+            intent.putExtra("username", username);
+            intent.putExtra("password", password);
             this.setResult(RESULT_OK, intent);
             Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
             this.finish();

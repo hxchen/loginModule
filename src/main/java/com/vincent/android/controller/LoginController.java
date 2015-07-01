@@ -25,7 +25,7 @@ public class LoginController extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_layout);
+        setContentView(LoginModuleApi.getInstance().getLoginActivityUI());
         init();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
@@ -51,16 +51,16 @@ public class LoginController extends ActionBarActivity {
 
     private void init(){
         userService = new UserService(this);
-        etUsername = (EditText)findViewById(R.id.login_name);
-        etPassword = (EditText)findViewById(R.id.login_pass);
+        etUsername = (EditText)findViewById(R.id.loginModuleID_login_name);
+        etPassword = (EditText)findViewById(R.id.loginModuleID_login_pass);
 
     }
 
     //@TODO: 完成用户类型划分
-    public void login(View view) {
+    public void loginModuleID_login(View view) {
         UserService userService = new UserService(this);
-        String login_name = ((EditText)findViewById(R.id.login_name)).getText().toString();
-        String login_pass = ((EditText)findViewById(R.id.login_pass)).getText().toString();
+        String login_name = ((EditText)findViewById(R.id.loginModuleID_login_name)).getText().toString();
+        String login_pass = ((EditText)findViewById(R.id.loginModuleID_login_pass)).getText().toString();
         int flat = userService.login(login_name, login_pass);
         switch (flat) {
             case 1: {
@@ -105,7 +105,7 @@ public class LoginController extends ActionBarActivity {
         }
     }
 
-    public void regist(View view) {
+    public void loginModuleID_regist(View view) {
         Intent intent = new Intent();
         intent.setClass(LoginController.this, RegistController.class);
         startActivityForResult(intent, 1);
