@@ -49,9 +49,9 @@ public class RegistController extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == android.R.id.home) {
-            Intent intent = new Intent();
-            intent.setClass(this, LoginController.class);
-            startActivity(intent);
+//            Intent intent = new Intent();
+//            intent.setClass(this, LoginController.class);
+//            startActivity(intent);
             this.finish();
             return true;
         }

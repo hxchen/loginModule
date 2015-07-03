@@ -136,6 +136,7 @@ public class ManageController extends ActionBarActivity {
         intent.setClass(ManageController.this, LoginModuleApi.getInstance().getManageLogoutClass());
         startActivity(intent);
         this.finish();
+        Toast.makeText(ManageController.this, "退出登录", Toast.LENGTH_SHORT);
     }
 
     // 长按菜单响应函数

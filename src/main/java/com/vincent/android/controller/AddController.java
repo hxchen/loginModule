@@ -75,7 +75,7 @@ public class AddController extends ActionBarActivity{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 UserModel.getInstance()
                         .setAvatar(byteArrayOutputStream.toByteArray());
-                ImageView showImage = (ImageView)findViewById(R.id.loginModule_regist_image_view);
+                ImageView showImage = (ImageView)findViewById(R.id.loginModule_add_image_view);
                 showImage.setImageURI(imagePath);
             }
             catch (Exception e){
@@ -86,13 +86,13 @@ public class AddController extends ActionBarActivity{
 
 
     // 调用系统api获取图片
-    protected void loginModule_getImage(View view) {
+    public void loginModule_getImage(View view) {
         Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
 
-    protected void loginModule_add(View view) {
+    public void loginModule_add(View view) {
         String username = etUsername.getText().toString();
         if(TextUtils.isEmpty(username)){
             Toast.makeText(this, "用户名不能为空", Toast.LENGTH_SHORT).show();
