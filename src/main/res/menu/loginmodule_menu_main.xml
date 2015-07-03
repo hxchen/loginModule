@@ -6,11 +6,17 @@
           android:orderInCategory="100"
           android:icon="@drawable/abc_ic_go_search_api_mtrl_alpha"
           app:showAsAction="collapseActionView|ifRoom"
-            android:onClick="addUser"/>
+            android:onClick="LoginModule_addUser"/>
 
     <item android:title="@string/action_logout"
           android:orderInCategory="100"
           android:icon="@drawable/abc_ic_commit_search_api_mtrl_alpha"
           app:showAsAction="collapseActionView|ifRoom"
-          android:onClick="logout"/>
+          android:onClick="LoginModule_logout"/>
+    <item android:title="@string/action_logout"
+          android:orderInCategory="100"
+          android:icon="@drawable/abc_ic_commit_search_api_mtrl_alpha"
+          app:showAsAction="collapseActionView|ifRoom"
+          android:onClick="jump"/>
+
 </menu>

@@ -2,9 +2,9 @@ package com.vincent.android;
 
 import android.app.Activity;
 import android.content.Intent;
+import com.vincent.android.controller.EditController;
 import com.vincent.android.controller.LoginController;
 import com.vincent.android.controller.R;
-import com.vincent.android.controller.UserController;
 import com.vincent.android.model.UserModel;
 
 /**
@@ -22,7 +22,7 @@ public class LoginModuleApi {
     }
 
     private Class manageLogoutClass;
-    private Class loginClass;
+//    private Class loginClass;
     private int loginRequestCode;
     private Class logoutClass;
 
@@ -32,45 +32,46 @@ public class LoginModuleApi {
 
     private LoginModuleApi() {
         this.manageLogoutClass = LoginController.class;
-        this.loginClass = UserController.class;
+        this.logoutClass = LoginController.class;
+//        this.loginClass = EditController.class;
         this.loginRequestCode = 1;
-        this.token = "sb token";
+        this.token = null;
         this.registActivityUI = R.layout.loginmodule_regist_layout;
         this.loginActivityUI = R.layout.loginmodule_login_layout;
         this.registDefaultImg = null;
     }
 
-    /*
+    /**
      * 设置管理员退出时跳转页面，默认为登录页面
      */
     public LoginModuleApi setManageLogoutClass(Class _class) {
         this.manageLogoutClass = _class;
         return this;
     }
+//
+//    /**
+//     * 获取登录后返回的页面的类
+//     */
+//    public Class getLoginClass() {
+//        return this.loginClass;
+//    }
 
-    /*
-     * 获取登录后返回的页面的类
-     */
-    public Class getLoginClass() {
-        return this.loginClass;
-    }
+//    /**
+//     * 设置登录后跳转的页面
+//     */
+//    public LoginModuleApi setLoginClass(Class _class) {
+//        this.loginClass = _class;
+//        return this;
+//    }
 
-    /*
-     * 设置登录后跳转的页面
-     */
-    public LoginModuleApi setLoginClass(Class _class) {
-        this.loginClass = _class;
-        return this;
-    }
-
-    /*
+    /**
      * 获取管理员退出时跳转的页面，默认为登录页面
      */
     public Class getManageLogoutClass() {
         return this.manageLogoutClass;
     }
 
-    /*
+    /**
      * 设置登录时的请求码，默认为1
      */
     public LoginModuleApi setLoginRequestCode(int _code){
@@ -78,35 +79,35 @@ public class LoginModuleApi {
         return this;
     }
 
-    /*
+    /**
      * 获取登录时的请求码
      */
     public int getLoginRequestCode() {
         return this.loginRequestCode;
     }
 
-    /*
+    /**
      * 获取token
      */
     public String getToken() {
         return this.token;
     }
 
-    /*
-     * 设置token
-     */
+    /**
+    * 设置token
+    */
     public LoginModuleApi setToken(String _token){
         this.token  = _token;
         return this;
     }
 
-    /*
+    /**
      * 获取默认注册图片
      */
     public byte[] getRegistDefaultImg() {
         return this.registDefaultImg;
     }
-    /*
+    /**
      * 设置默认注册图片
      */
     public LoginModuleApi setRegistDefaultImg(byte[] _img) {
@@ -114,7 +115,7 @@ public class LoginModuleApi {
         return this;
     }
 
-    /*
+    /**
      * 登录，参数为当前activity的this
      */
     public void login(Activity _this) {
@@ -123,7 +124,7 @@ public class LoginModuleApi {
         _this.startActivityForResult(intent, this.loginRequestCode);
     }
 
-    /*
+    /**
      * 退出，参数为当前activity的this
      */
     public boolean logout(Activity _this) {
@@ -136,10 +137,17 @@ public class LoginModuleApi {
             return true;
         }
         Intent intent = new Intent();
-        intent.setClass(_this, LoginController.class);
+        intent.setClass(_this, logoutClass);
         _this.startActivity(intent);
         _this.finish();
         return true;
+    }
+
+    public void edit(Activity _this) {
+        Intent intent = new Intent();
+        intent.setClass(_this, EditController.class);
+        _this.startActivity(intent);
+        _this.finish();
     }
 
 //    public void regist (Activity _this) {
@@ -167,5 +175,13 @@ public class LoginModuleApi {
 
     public int getRegistActivityUI() {
         return  this.registActivityUI;
+    }
+
+    public Class getLogoutClass() {
+        return logoutClass;
+    }
+
+    public void setLogoutClass(Class logoutClass) {
+        this.logoutClass = logoutClass;
     }
 }

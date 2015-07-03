@@ -33,6 +33,7 @@
                 android:id="@+id/regist_button"
                 android:onClick="loginModule_regist"
                 android:textSize="20dp"/>
+
     </LinearLayout>
 
 </LinearLayout>

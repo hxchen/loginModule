@@ -3,6 +3,7 @@ package com.vincent.android.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,20 +65,23 @@ public class LoginController extends ActionBarActivity {
                 Intent intent = new Intent();
                 switch (UserModel.getInstance().getRole()) {
                     case 'n': {
-                        intent.setClass(LoginController.this, LoginModuleApi.getInstance().getLoginClass());
+//                        intent.setClass(LoginController.this, LoginModuleApi.getInstance().getLoginClass());
                         intent.putExtra("flag", LoginModuleApi.FLAG_OK);
+                        LoginModuleApi.getInstance().setToken("sb token");
                         intent.putExtra("token", LoginModuleApi.getInstance().getToken());
                         this.setResult(RESULT_OK, intent);
+                        this.finish();
                         break;
                     }
                     case 'y': {
-                        intent.setClass(LoginController.this, ManageController.class);
-                        LoginController.this.finish();
+                        intent.setClass(this, ManageController.class);
+//                        LoginController.this.finish();
                         startActivity(intent);
+                        finish();
                         break;
                     }
                 }
-                this.finish();
+
                 break;
             }
             case 201: {

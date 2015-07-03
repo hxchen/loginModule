@@ -22,9 +22,6 @@
                   android:theme="@style/AppThemeWithActionBar"
                   android:label="Login">
         </activity>
-        <activity android:name=".UserController"
-                  android:label="User">
-        </activity>
         <activity android:name=".ManageController"
                   android:theme="@style/AppThemeWithActionBar"
                   android:label="Manage">
@@ -32,6 +29,10 @@
         <activity android:name=".AddController"
                   android:theme="@style/AppThemeWithActionBar"
                   android:label="Manage">
+        </activity>
+        <activity android:name=".EditController"
+                  android:theme="@style/AppThemeWithActionBar"
+                  android:label="User">
         </activity>
     </application>
 

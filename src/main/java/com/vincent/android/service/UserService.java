@@ -142,4 +142,35 @@ public class UserService {
             return  411;
         }
     }
+
+
+    //修改用户
+    public  int updateMail(String mail){
+        SQLiteDatabase sdb = databaseHelper.getWritableDatabase();
+        //默认为普通用户注册
+        String sql = "update user set mail=?  where username =?";
+        Object obj[] = {  mail, UserModel.getInstance().getUsername()};
+        try {
+            sdb.execSQL(sql, obj);
+            return  1;
+        }
+        catch (Exception err) {
+            Log.e("sql error", err.toString());
+            return 511;
+        }
+    }
+
+    public  int updateAvatar(byte[] imageData){
+        SQLiteDatabase sdb = databaseHelper.getWritableDatabase();
+        String sql = "update user set avatar=?  where username =?";
+        Object obj[] = {  imageData, UserModel.getInstance().getUsername()};
+        try {
+            sdb.execSQL(sql, obj);
+            return  1;
+        }
+        catch (Exception err) {
+            Log.e("sql error", err.toString());
+            return 511;
+        }
+    }
 }

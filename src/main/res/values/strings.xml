@@ -8,4 +8,5 @@
     <string name="login_button">登陆</string>
     <string name="regist_button">注册</string>
     <string name="add_button">新增</string>
+    <string name="edit_button">修改</string>
 </resources>

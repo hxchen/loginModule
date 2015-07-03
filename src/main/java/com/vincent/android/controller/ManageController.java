@@ -97,7 +97,7 @@ public class ManageController extends ActionBarActivity {
     }
 
     // 增加用户
-    public void addUser(MenuItem item) {
+    public void LoginModule_addUser(MenuItem item) {
         Intent intent = new Intent();
         intent.setClass(ManageController.this, AddController.class);
         startActivityForResult(intent, 1);
@@ -123,8 +123,14 @@ public class ManageController extends ActionBarActivity {
         finish();
     }
 
+    public void jump(MenuItem item) {
+        Intent intent = new Intent();
+        intent.setClass(ManageController.this, EditController.class);
+        startActivity(intent);
+    }
+
     // 退出登录
-    protected void logout(MenuItem item) {
+    public void LoginModule_logout(MenuItem item) {
         UserModel.getInstance().setToken(null);
         Intent intent = new Intent();
         intent.setClass(ManageController.this, LoginModuleApi.getInstance().getManageLogoutClass());
